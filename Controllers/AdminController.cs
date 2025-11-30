@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication16.Models;
+using static WebApplication16.Data.Models.Document;
 
 namespace WebApplication16.Controllers
 {
