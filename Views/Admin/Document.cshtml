@@ -1,38 +1,25 @@
-﻿@model IEnumerable<WebApplication16.Models.Document>
+﻿@using WebApplication16.Data.Models
+@{
+    var doc = new Document { Id = 1, Title = "ExampleDoc", Status = Document.DocumentStatus.InReview };
+}
 
-<div class="container mx-auto p-8">
-    <h2 class="text-2xl font-bold mb-4">Admin — Documents</h2>
+<div class="glass p-10 rounded-xl space-y-6">
 
-    <table class="min-w-full bg-white shadow-md rounded">
-        <thead class="bg-gray-200">
-            <tr>
-                <th class="px-4 py-2 text-left">ID</th>
-                <th class="px-4 py-2 text-left">Name</th>
-                <th class="px-4 py-2 text-left">Status</th>
-                <th></th>
-            </tr>
-        </thead>
+    <h1 class="text-4xl font-bold">Review: @doc.Title</h1>
 
-        <tbody>
-            @foreach (var doc in Model)
+    <p class="text-lg"><b>Current Status:</b> @doc.Status</p>
+
+    <form class="space-y-4">
+        <select class="bg-white/20 border border-white/30 text-white p-3 rounded w-full">
+            @foreach (var s in Enum.GetValues(typeof(Document.DocumentStatus)))
             {
-                <tr class="border-t">
-                    <td class="px-4 py-2">@doc.Id</td>
-                    <td class="px-4 py-2">@doc.FileName</td>
-                    <td class="px-4 py-2">@doc.Status</td>
-                    <td class="px-4 py-2">
-                        <a href="/Admin/Document/@doc.Id"
-                           class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                            Open
-                        </a>
-                    </td>
-                </tr>
+                <option>@s</option>
             }
-        </tbody>
-    </table>
+        </select>
 
-    <a href="/Admin/Export"
-       class="inline-block mt-4 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900">
-        Export CSV
-    </a>
+        <button class="btn w-full">Apply</button>
+    </form>
+
+    <a href="/Admin/Documents" class="btn-secondary">Back</a>
+
 </div>

@@ -1,0 +1,38 @@
+﻿@using WebApplication16.Data.Models
+@{
+    var Model = new List<Document>
+    {
+        new Document { Id = 1, Title = "UserDoc1.pdf", Status = Document.DocumentStatus.Draft, BlobName = "userdoc1.pdf", UserId = 1 },
+        new Document { Id = 2, Title = "Homework.docx", Status = Document.DocumentStatus.InReview, BlobName = "homework.docx", UserId = 1 },
+        new Document { Id = 3, Title = "Presentation.pdf", Status = Document.DocumentStatus.Approved, BlobName = "presentation.pdf", UserId = 1 }
+    };
+}
+
+<h1 class="text-4xl font-bold mb-6">🛡 Admin — Document Review</h1>
+
+<table class="w-full glass rounded-xl overflow-hidden">
+    <thead class="bg-white/20">
+        <tr class="text-left text-lg">
+            <th class="px-4 py-3">ID</th>
+            <th class="px-4 py-3">Title</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">User</th>
+            <th class="px-4 py-3"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var doc in Model)
+        {
+            <tr class="table-row-hover border-t border-white/10">
+                <td class="px-4 py-3">@doc.Id</td>
+                <td class="px-4 py-3">@doc.Title</td>
+                <td class="px-4 py-3">@doc.Status</td>
+                <td class="px-4 py-3">@doc.UserId</td>
+                <td class="px-4 py-3 text-right">
+                    <a href="/Admin/Document/@doc.Id" class="btn">Review</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
